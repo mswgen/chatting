@@ -1,0 +1,20 @@
+{
+    "name": "chatting",
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "engines": {
+        "node": "12.x"
+    },
+    "keywords": [
+        "chatting"
+    ],
+    "dependencies": {
+        "socket.io": "2.3.0"
+    },
+    "author": "",
+    "license": "UNLISENCED",
+    "version": "1.0.0",
+    "description": "realtime chatting service"
+}
