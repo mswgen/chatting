@@ -75,9 +75,9 @@ height: 20px;
   var rateLimit = 0;
   $(function () {
     $('form').submit(function(e){
-      if (rateLimit > 5) return;
       e.preventDefault();
       if (document.querySelector('#m').value == '') return;
+      if (rateLimit > 5) return alert('워, 워, 진정하시죠\n\n메세지를 너무 빨리 보내고 있어요!');
       socket.emit('chat message', nickname + ': ' + document.querySelector('#m').value);
       $('#m').val('');
       rateLimit++;
