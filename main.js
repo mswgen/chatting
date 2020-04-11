@@ -72,13 +72,19 @@ height: 20px;
     <script>
   var nickname = '';
   var socket = io();
+  var rateLimit = 0;
   $(function () {
     $('form').submit(function(e){
+      if (rateLimit > 5) return;
       e.preventDefault();
       if (document.querySelector('#m').value == '') return;
       socket.emit('chat message', nickname + ': ' + document.querySelector('#m').value);
       $('#m').val('');
+      rateLimit++;
       return false;
+      setTimeout(function(){
+        rateLimit--;
+      }, 1000);
     });
     var typings = new Array();
     socket.on('chat message', function (msg) {
