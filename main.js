@@ -73,18 +73,21 @@ height: 20px;
   var nickname = '';
   var socket = io();
   var rateLimit = 0;
-  $(function () {
-    $('form').submit(function(e){
+  $(async function () {
+    $('form').submit(async function(e){
       e.preventDefault();
       if (document.querySelector('#m').value == '') return;
-      if (rateLimit > 5) return alert('워, 워, 진정하시죠\n\n메세지를 너무 빨리 보내고 있어요!');
+      if (rateLimit > 5){ 
+        alert('워, 워, 진정하시죠\\n\\n메세지를 너무 빨리 보내고 있어요!');
+        return false;
+      }
       socket.emit('chat message', nickname + ': ' + document.querySelector('#m').value);
       $('#m').val('');
       rateLimit++;
-      return false;
-      setTimeout(function(){
+      await setTimeout(function(){
         rateLimit--;
-      }, 1000);
+      }, 5000);
+      return false;
     });
     var typings = new Array();
     socket.on('chat message', function (msg) {
