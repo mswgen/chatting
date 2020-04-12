@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="채팅">
+    <meta name="description" content="실시간 채팅 서비스">
+    <title>채팅</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./script.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <div id='start'>
+        <h1 id='title'>시작하기</h1>
+        <div id='grid2'>
+        <input placeholder='다른 분들이 뭐라고 불러야 하나요?' id='nickname' autocomplete='off' class='starting' autofocus />
+        <button class='starting' id='continue' onclick="
+            if (document.querySelector('#nickname').value == '') return;
+            nickname = document.querySelector('#nickname').value;
+            document.querySelector('#start').style.display = 'none';
+            document.querySelector('#recaptcha_container').style.display = 'block';
+        ">계속하기</button>
+        </div>
+    </div>
+        <div id='recaptcha_container'>
+        <h1 id='title2'>시작하기</h1>
+        <p>삐리릭, 삐리리릭?</p>
+        <center id='recaptcha'></center>
+    </div>
+    <div id='main'>
+    <textarea id="messages" readonly></textarea>
+    <form action="">
+      <input id="m" placeholder="메세지 입력" autocomplete="off" autofocus onfocus="
+socket.emit('typing_start', nickname);
+       " onblur="
+socket.emit('typing_end', nickname);
+       ">
+      <button id='send'>전송</button>
+    </form>
+    <p id='typing_indicator'></p>
+    <textarea readonly id="stat">유저 목록</textarea>
+    <div></div>
+    </div>
+  </body>
+</html>

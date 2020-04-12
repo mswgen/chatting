@@ -1,0 +1,54 @@
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    }
+          body {
+    font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+    }
+          form {
+    padding: 3px; bottom: 0; width: 100%; height: 50px;
+    }
+          form input {
+    border: 1px solid black; border-radius: 5px; padding: 10px; width: 100%; margin-right: 5%; display: block;
+    }
+          form button {
+    width: 9%; border: 1px solid lightgray; border-radius: 5px; padding: 10px; display: none;
+    }
+          #messages {
+    list-style-type: none; margin: 0; padding: 0;
+    }
+        #grid2 {
+    display: grid;
+    grid-template-rows: auto 30px;
+    text-align: center;
+    height: 60px;
+    margin-left: 25vw;
+    width: 50vw;
+    }
+         #main {
+    height: 800px;
+    display: none;
+    }
+          #title {
+    width: 50vw;
+    margin-bottom: 60px;
+    margin-left: 25vw;
+    text-align: center;
+    }
+          #title2 {
+    margin-bottom: 60px;
+    }
+         #start {
+    text-align: center;
+    }
+         #send {
+    display: none;
+    }
+        #recaptcha_container {
+    display: none;
+    width: 50vw;
+    margin-left: 25vw;
+    text-align: center;
+    }
+         #typing_indicator {
+    height: 20px;
+    }
