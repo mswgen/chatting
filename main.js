@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
   const io = require('socket.io')(server);
   var _url = url.parse(req.url);
   if (_url.pathname == '/') {
-    fs.readFile('./index.html', 'utf8', async (err, data) => {
+    fs.readFile('./index.html', 'utf8', (err, data) => {
       if (err) {
           res.writeHead(404);
           res.end('404 Not Found');
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
       }
   });
   } else if (_url.pathname == '/style.css') {
-    fs.readFile('./style.css', 'utf8', async (err, data) => {
+    fs.readFile('./style.css', 'utf8', (err, data) => {
       if (err) {
           res.writeHead(404);
           res.end('404 Not Found');
@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
       }
   });
   } else if (_url.pathname == '/script.js') {
-    fs.readFile('./script.js', 'utf8', async (err, data) => {
+    fs.readFile('./script.js', 'utf8', (err, data) => {
       if (err) {
           res.writeHead(404);
           res.end('404 Not Found');
@@ -43,19 +43,24 @@ const server = http.createServer((req, res) => {
       }
   });
   }
-    io.on('connection', async function (socket) {
+    io.on('connection', socket => {
+      /*
       socket.on('verify_end', nick => {
         socket.username = nick;
         users.push(socket.username);
         count++;
-        console.log(users);
         io.emit('user_result', users);
       });
+      */
+      /*
       socket.on('disconnect', () => {
         users.splice(users.indexOf(socket.username), 1);
         count--;
+        console.log('disconnected');
+        console.log(count);
         io.emit('user_result', users);
       });
+      */
       socket.on('message', message => {
           io.emit('message', message);
       });
@@ -64,6 +69,9 @@ const server = http.createServer((req, res) => {
       });
       socket.on('typing_end', user => {
           io.emit('typing_end', user);
+      });
+      socket.on('online', () => {
+        return;
       });
     });
 });
